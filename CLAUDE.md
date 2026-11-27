@@ -11,6 +11,8 @@
 ## JavaScript
 - ビルド不要で `index.html` をそのまま開いて動くこと（ES modules は使わず、通常の `<script src>` で読み込む）
 - 読み込み順は `index.html` に書いた順。`util.js` → `store.js` → 各機能 → `main.js`（最後に起動処理）
+- データ（`state`）を変更したら必ず `save()` / `saveSoon()` / `touch()` のどれかを呼ぶ。クラウド同期はここから自動で走る（`sync.js` が差分を検出して送る）
+- Firebase SDK は compat 版を `<script src>` で読み込む。SDK が読み込めない・未設定でも端末内保存で動くようにする
 - ユーザーが入力した文字は `textContent` / `value` で表示し、`innerHTML` に入れない
 
 ## その他

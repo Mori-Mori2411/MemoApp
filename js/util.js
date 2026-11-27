@@ -19,3 +19,5 @@ const mobile=()=>matchMedia('(max-width:760px)').matches;
 function autosize(t){t.style.height='auto';t.style.height=t.scrollHeight+'px'}
 function iconBtn(name,label,fn,cls){return h('button',{class:'ib'+(cls?' '+cls:''),title:label,'aria-label':label,onclick:fn},svg(name))}
 function fmt(ts){const d=new Date(ts),n=new Date();if(d.toDateString()===n.toDateString())return d.getHours()+':'+String(d.getMinutes()).padStart(2,'0');return (d.getFullYear()!==n.getFullYear()?d.getFullYear()+'/':'')+(d.getMonth()+1)+'/'+d.getDate()}
+// オブジェクトのキー順をそろえて文字列化（同期の差分チェック用）
+const canon=o=>JSON.stringify(o,(k,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.keys(v).sort().reduce((a,x)=>(a[x]=v[x],a),{}):v);

@@ -1,6 +1,6 @@
 # 反省ノート (MemoApp)
 
-ゲームや仕事の反省・対策をまとめるためのメモアプリです。`index.html` 1ファイルで動きます。
+ゲームや仕事の反省・対策をまとめるためのメモアプリです。ビルド不要で、`index.html` を開くだけで動きます。
 
 ## 主な機能
 
@@ -8,17 +8,37 @@
 - メモにタグ（ゲーム、仕事、SF6 など）を複数付けられる
 - 本文は「項目（トグル）」ごとに開閉・編集・並べ替えができる
 - タイトル・タグ・項目名・本文をまとめて検索（ヒットした項目は自動で開く）
-- データはブラウザの localStorage に自動保存。「バックアップ」から JSON で書き出し・復元
+- Google でログインすると Firestore（Firebase）にメモを保存し、端末どうしでリアルタイムに同期
+- ログインしていないときはブラウザ内（localStorage）に保存。「バックアップ」から JSON で書き出し・復元
 
 ## 使い方
 
 `index.html` をブラウザで開くだけで使えます。
 GitHub Pages を有効にすると URL から開けます（Settings → Pages → Branch: `main` / `root`）。
 
+## Firebase の設定（クラウド同期）
+
+1. [Firebase コンソール](https://console.firebase.google.com/) でプロジェクトを作成
+2. 「Authentication」→「Sign-in method」で **Google** を有効にする
+3. 「Authentication」→「設定」→「承認済みドメイン」に `mori-mori2411.github.io` を追加
+4. 「Firestore Database」でデータベースを作成（ロケーションは `asia-northeast1`（東京）など）
+5. Firestore の「ルール」タブに `firestore.rules` の中身を貼り付けて公開
+6. 「プロジェクトの設定」→「マイアプリ」でウェブアプリを登録し、表示された `firebaseConfig` を `js/firebase-config.js` の `FIREBASE_CONFIG` に貼り付ける
+
+`FIREBASE_CONFIG` が `null` のままなら、同期なしでブラウザ内だけに保存されます。
+
+### データの置き場所
+
+```
+users/{uid}                 { tags: [...] }        タグ一覧
+users/{uid}/notes/{メモID}   { title, tags, blocks, pinned, createdAt, updatedAt }
+```
+
 ## ファイル構成
 
 ```
 index.html          画面の骨組み
+firestore.rules     Firestore のセキュリティルール（本人だけ読み書き可）
 css/
   base.css          色の変数・リセット・共通パーツ（ボタン、チップ）
   layout.css        サイドバーとメイン領域の配置・開閉
@@ -26,8 +46,10 @@ css/
   editor.css        タイトル・タグ表示・トグル項目・初期画面
   tags.css          タグ選択ポップアップ・タグ管理
   modal.css         ダイアログ・入力欄・トースト通知
+  account.css       ログイン・同期状態の表示
 js/
   util.js           共通の道具（要素作成・アイコン・日付表示など）
+  firebase-config.js Firebase の接続設定
   store.js          データの保存・読み込み・サンプルデータ
   search.js         検索の判定とハイライト
   sidebar.js        タグ絞り込みとメモ一覧の描画
@@ -36,6 +58,7 @@ js/
   modal.js          汎用ダイアログ・確認・通知
   note-create.js    新規メモ作成ダイアログ
   backup.js         バックアップの書き出し・復元
+  sync.js           Google ログインと Firestore 同期
   main.js           起動処理（ボタン登録・初期表示）
 ```
 

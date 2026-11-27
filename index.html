@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="css/editor.css">
 <link rel="stylesheet" href="css/tags.css">
 <link rel="stylesheet" href="css/modal.css">
+<link rel="stylesheet" href="css/account.css">
 </head>
 <body>
 <div class="app" id="app">
@@ -24,6 +25,7 @@
     <label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="メモを検索" autocomplete="off"></label>
     <div class="tagbar" id="tagbar"></div>
     <nav class="list" id="list"></nav>
+    <div class="account" id="account"></div>
     <div class="side-foot">
       <button id="tagMgr"><svg viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/></svg>タグ管理</button>
       <button id="backup"><svg viewBox="0 0 24 24"><path d="M12 3v12m0 0-4-4m4 4 4-4M4 17v3h16v-3"/></svg>バックアップ</button>
@@ -34,7 +36,12 @@
 </div>
 <input type="file" id="file" accept="application/json,.json" hidden>
 
+<!-- Firebase（クラウド同期）: 読み込めなくても端末内保存で動く -->
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script src="js/util.js"></script>
+<script src="js/firebase-config.js"></script>
 <script src="js/store.js"></script>
 <script src="js/search.js"></script>
 <script src="js/sidebar.js"></script>
@@ -43,6 +50,7 @@
 <script src="js/modal.js"></script>
 <script src="js/note-create.js"></script>
 <script src="js/backup.js"></script>
+<script src="js/sync.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

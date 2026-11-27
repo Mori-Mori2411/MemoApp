@@ -40,7 +40,7 @@ function renderEditor(){
   const adds=h('div',{class:'adds'},
     h('button',{onclick:()=>addBlock(n,'toggle')},svg('toggle'),'項目（トグル）を追加'),
     h('button',{onclick:()=>addBlock(n,'text')},svg('text'),'テキストを追加'));
-  ed.append(title,meta,blocks,adds,h('p',{class:'hint'},'項目名で Enter を押すと中身に移動します。入力内容はこのブラウザに自動保存されます。'));
+  ed.append(title,meta,blocks,adds,h('p',{class:'hint'},'項目名で Enter を押すと中身に移動します。'+(typeof sync!=='undefined'&&sync.user?'入力内容はクラウドに自動保存され、ほかの端末にも反映されます。':'入力内容はこのブラウザに自動保存されます。ログインするとクラウドに保存できます。')));
   main.append(ed);
   requestAnimationFrame(()=>ed.querySelectorAll('textarea').forEach(autosize));
 }

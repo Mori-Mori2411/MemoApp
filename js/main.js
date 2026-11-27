@@ -13,3 +13,4 @@ document.addEventListener('keydown',e=>{
 if(mobile())setSide(false);
 else{const first=[...state.notes].sort((a,b)=>(b.pinned-a.pinned)||(b.updatedAt-a.updatedAt))[0];if(first)ui.cur=first.id}
 renderSide();renderEditor();
+initSync();

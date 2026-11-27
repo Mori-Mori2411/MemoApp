@@ -16,10 +16,15 @@ function sample(){
     ]}
   ]};
 }
-function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.notes)&&Array.isArray(s.tags))return s}catch(e){}return sample()}
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.notes)&&Array.isArray(s.tags))return s}catch(e){}
+  const s=sample();s.sampleSig=canon(s.notes);return s}
+// サンプルのまま一度も編集されていないか（クラウドにメモがあればサンプルは捨てる）
+const isPristineSample=()=>!!state.sampleSig&&canon(state.notes)===state.sampleSig;
 let state=load();
 let saveT=null;
-function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+// 変更を保存する。ログイン中はここからクラウド同期も予約される
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}
+  if(typeof scheduleSync==='function')scheduleSync()}
 function saveSoon(){clearTimeout(saveT);saveT=setTimeout(save,300)}
 window.addEventListener('beforeunload',save);
 
