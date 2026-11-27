@@ -4,10 +4,11 @@ const terms=()=>norm(ui.q).split(/\s+/).filter(Boolean);
 function match(n,ts){
   if(!ts.length)return{ok:true,hits:new Set(),snip:null};
   const tagNames=n.tags.map(id=>tagById(id)?.name||'').join(' ');
-  const all=norm([n.title,tagNames,...n.blocks.map(b=>(b.title||'')+'\n'+(b.body||''))].join('\n'));
+  const list=allBlocks(n),tabNames=hasTabs(n)?n.tabs.map(t=>t.name||'').join(' '):'';
+  const all=norm([n.title,tagNames,tabNames,...list.map(({b})=>(b.title||'')+'\n'+(b.body||''))].join('\n'));
   if(!ts.every(t=>all.includes(t)))return{ok:false};
   const hits=new Set();let snip=null;
-  for(const b of n.blocks){
+  for(const {b,tab} of list){
     const tt=norm(b.title),bb=norm(b.body);
     const t=ts.find(t=>tt.includes(t)||bb.includes(t));
     if(!t)continue;
@@ -15,7 +16,7 @@ function match(n,ts){
     if(!snip){
       const i=bb.indexOf(t);
       let text=i<0?'':(i>18?'…':'')+(b.body||'').slice(Math.max(0,i-18),i+50).replace(/\n/g,' ');
-      snip={label:b.title||'',text};
+      snip={label:(tab?'['+(tab.name||'無題のタブ')+'] ':'')+(b.title||''),text};
     }
   }
   return{ok:true,hits,snip};

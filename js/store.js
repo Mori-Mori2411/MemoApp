@@ -4,11 +4,16 @@ function sample(){
   const t1={id:uid(),name:'ゲーム',color:COLORS[3]},t2={id:uid(),name:'SF6',color:COLORS[0]},t3={id:uid(),name:'仕事',color:COLORS[2]};
   const now=Date.now();
   return {tags:[t1,t2,t3],notes:[
-    {id:uid(),title:'SF6 ルーク',tags:[t1.id,t2.id],pinned:true,createdAt:now,updatedAt:now,blocks:[
-      {id:uid(),type:'text',body:'サンプルのメモです。自由に書き換えたり削除したりしてください。'},
-      {id:uid(),type:'toggle',title:'画面端でやること',open:true,body:'・ここに画面端で狙う連携を書く\n・起き攻めの択\n・逃げられたときの対応'},
-      {id:uid(),type:'toggle',title:'JP対策',open:false,body:'・近づき方\n・飛び道具への対応\n・反省点'},
-      {id:uid(),type:'toggle',title:'今日の反省',open:false,body:''}
+    {id:uid(),title:'SF6',tags:[t1.id,t2.id],pinned:true,createdAt:now,updatedAt:now,blocks:[],tabs:[
+      {id:uid(),name:'ルーク',blocks:[
+        {id:uid(),type:'text',body:'サンプルのメモです。自由に書き換えたり削除したりしてください。'},
+        {id:uid(),type:'toggle',title:'画面端でやること',open:true,body:'・ここに画面端で狙う連携を書く\n・起き攻めの択\n・逃げられたときの対応'},
+        {id:uid(),type:'toggle',title:'JP対策',open:false,body:'・近づき方\n・飛び道具への対応\n・反省点'}
+      ]},
+      {id:uid(),name:'ジェイミー',blocks:[
+        {id:uid(),type:'toggle',title:'立ち回り',open:true,body:''},
+        {id:uid(),type:'toggle',title:'今日の反省',open:false,body:''}
+      ]}
     ]},
     {id:uid(),title:'週次ふりかえり',tags:[t3.id],pinned:false,createdAt:now-864e5,updatedAt:now-864e5,blocks:[
       {id:uid(),type:'toggle',title:'よかったこと',open:true,body:''},

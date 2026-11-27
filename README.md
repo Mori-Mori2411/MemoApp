@@ -7,6 +7,7 @@
 - 左サイドバーに「新規メモ」・検索・タグ絞り込み・メモ一覧
 - メモにタグ（ゲーム、仕事、SF6 など）を複数付けられる
 - 本文は「項目（トグル）」ごとに開閉・編集・並べ替えができる
+- 1つのメモの中をタブ（キャラ別など）で分けられる。タブの追加・名前変更・並べ替え・削除ができる
 - タイトル・タグ・項目名・本文をまとめて検索（ヒットした項目は自動で開く）
 - Google でログインすると Firestore（Firebase）にメモを保存し、端末どうしでリアルタイムに同期
 - ログインしていないときはブラウザ内（localStorage）に保存。「バックアップ」から JSON で書き出し・復元
@@ -31,7 +32,8 @@ GitHub Pages を有効にすると URL から開けます（Settings → Pages �
 
 ```
 users/{uid}                 { tags: [...] }        タグ一覧
-users/{uid}/notes/{メモID}   { title, tags, blocks, pinned, createdAt, updatedAt }
+users/{uid}/notes/{メモID}   { title, tags, blocks, tabs?, pinned, createdAt, updatedAt }
+                            tabs: [{ id, name, blocks }]（タブありのメモだけ）
 ```
 
 ## ファイル構成
@@ -44,6 +46,7 @@ css/
   layout.css        サイドバーとメイン領域の配置・開閉
   sidebar.css       新規ボタン・検索・タグ絞り込み・メモ一覧
   editor.css        タイトル・タグ表示・トグル項目・初期画面
+  note-tabs.css     メモ内タブのタブバー
   tags.css          タグ選択ポップアップ・タグ管理
   modal.css         ダイアログ・入力欄・トースト通知
   account.css       ログイン・同期状態の表示
@@ -53,6 +56,7 @@ js/
   store.js          データの保存・読み込み・サンプルデータ
   search.js         検索の判定とハイライト
   sidebar.js        タグ絞り込みとメモ一覧の描画
+  note-tabs.js      メモ内タブ（追加・切り替え・名前変更・削除）
   editor.js         メモ本文・トグル項目の描画と編集
   tags.js           タグの作成・付け外し・タグ管理
   modal.js          汎用ダイアログ・確認・通知

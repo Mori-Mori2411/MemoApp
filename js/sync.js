@@ -65,7 +65,11 @@ function stopListening(){sync.unsubs.forEach(f=>f());sync.unsubs=[];clearTimeout
 const userDoc=()=>sync.db.collection('users').doc(sync.user.uid);
 
 /* ---------- クラウドから受け取る ---------- */
-const fixNote=r=>({...r,tags:Array.isArray(r.tags)?r.tags:[],blocks:Array.isArray(r.blocks)?r.blocks:[]});
+const fixNote=r=>{
+  const n={...r,tags:Array.isArray(r.tags)?r.tags:[],blocks:Array.isArray(r.blocks)?r.blocks:[]};
+  if(Array.isArray(n.tabs))n.tabs=n.tabs.map(t=>({...t,blocks:Array.isArray(t.blocks)?t.blocks:[]}));
+  return n;
+};
 function onNotes(snap){
   if(sync.firstNotes){
     // 初回: クラウドと端末のメモを合体（同じメモは新しい方を採用、端末にしかないメモはこのあとアップロード）

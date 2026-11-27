@@ -9,7 +9,9 @@ const ICON={
   expand:'<path d="m7 10 5 5 5-5"/><path d="M7 5h10"/>',collapse:'<path d="m7 14 5-5 5 5"/><path d="M7 19h10"/>',
   toggle:'<path d="m8 8 4 4-4 4"/><path d="M14 12h6"/>',text:'<path d="M5 7h14M5 12h14M5 17h9"/>',
   menu:'<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16"/>',
-  check:'<path d="m5 12 5 5 9-10"/>'
+  check:'<path d="m5 12 5 5 9-10"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',left:'<path d="m15 6-6 6 6 6"/>',right:'<path d="m9 6 6 6-6 6"/>',
+  tabs:'<path d="M3 8h6l1-3h4l1 3h6v11H3z"/>'
 };
 const svg=n=>{const s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('viewBox','0 0 24 24');s.innerHTML=ICON[n];return s};
 function h(tag,props,...kids){const el=document.createElement(tag);for(const[k,v]of Object.entries(props||{})){if(v==null||v===false)continue;if(k==='class')el.className=v;else if(k==='value')el.value=v;else if(k==='style')el.style.cssText=v;else if(k.startsWith('on'))el.addEventListener(k.slice(2),v);else el.setAttribute(k,v===true?'':v)}for(const c of kids.flat(Infinity)){if(c==null||c===false)continue;el.append(c instanceof Node?c:document.createTextNode(String(c)))}return el}
