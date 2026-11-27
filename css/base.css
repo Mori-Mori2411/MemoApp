@@ -1,0 +1,27 @@
+/* 基本: 色の変数・リセット・共通パーツ（ボタン、チップ） */
+:root{color-scheme:light dark;
+  --bg:light-dark(#faf9f5,#262624);--side:light-dark(#f2f0e8,#1f1e1d);
+  --ink:light-dark(#2b2a27,#ecebe5);--muted:light-dark(#77746b,#a19e95);
+  --line:light-dark(#e2dfd4,#3a3936);--hover:light-dark(#e9e6dc,#2f2e2b);
+  --card:light-dark(#ffffff,#2d2c29);--accent:light-dark(#c4613f,#d97757);
+  --accent-ink:#fff;--mark:light-dark(#fbe3a6,#6b5420)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 "Noto Sans JP","Hiragino Sans","Yu Gothic UI",system-ui,sans-serif;overflow:hidden}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;border-radius:8px}
+input,textarea{font:inherit;color:inherit;background:none;border:0;outline:0}
+:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+svg{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+mark{background:var(--mark);color:inherit;border-radius:3px;padding:0 1px}
+
+.ib{width:36px;height:36px;display:inline-grid;place-items:center;color:var(--muted)}
+.ib:hover{background:var(--hover);color:var(--ink)}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:999px;font-size:12.5px;border:1px solid var(--line);background:var(--bg);color:var(--muted);white-space:nowrap}
+.chip .dot{width:8px;height:8px;border-radius:50%}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.primary{background:var(--accent);color:var(--accent-ink);padding:10px 18px;font-weight:500;border-radius:10px}
+.primary:hover{filter:brightness(1.06)}
+.ghost{padding:10px 16px;border-radius:10px;border:1px solid var(--line)}
+.ghost:hover{background:var(--hover)}
+.danger{color:#c0392b}

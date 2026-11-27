@@ -15,6 +15,30 @@
 `index.html` をブラウザで開くだけで使えます。
 GitHub Pages を有効にすると URL から開けます（Settings → Pages → Branch: `main` / `root`）。
 
+## ファイル構成
+
+```
+index.html          画面の骨組み
+css/
+  base.css          色の変数・リセット・共通パーツ（ボタン、チップ）
+  layout.css        サイドバーとメイン領域の配置・開閉
+  sidebar.css       新規ボタン・検索・タグ絞り込み・メモ一覧
+  editor.css        タイトル・タグ表示・トグル項目・初期画面
+  tags.css          タグ選択ポップアップ・タグ管理
+  modal.css         ダイアログ・入力欄・トースト通知
+js/
+  util.js           共通の道具（要素作成・アイコン・日付表示など）
+  store.js          データの保存・読み込み・サンプルデータ
+  search.js         検索の判定とハイライト
+  sidebar.js        タグ絞り込みとメモ一覧の描画
+  editor.js         メモ本文・トグル項目の描画と編集
+  tags.js           タグの作成・付け外し・タグ管理
+  modal.js          汎用ダイアログ・確認・通知
+  note-create.js    新規メモ作成ダイアログ
+  backup.js         バックアップの書き出し・復元
+  main.js           起動処理（ボタン登録・初期表示）
+```
+
 ## ショートカット
 
 - `Ctrl` / `⌘` + `K` : 検索欄へ移動

@@ -1,0 +1,46 @@
+/* エディタ: タイトル・タグ表示・トグル項目・初期画面 */
+.editor{max-width:780px;margin:0 auto;padding:8px 28px 120px}
+.title{width:100%;font-size:clamp(26px,4vw,34px);font-weight:700;line-height:1.25;padding:6px 0}
+.title::placeholder,.ttitle::placeholder,textarea::placeholder{color:var(--muted);opacity:.7}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:6px 0 18px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.meta .chip{color:var(--ink)}
+.meta .chip button{width:16px;height:16px;display:grid;place-items:center;color:var(--muted);margin-right:-4px}
+.meta .chip button svg{width:12px;height:12px}
+.addtag{border-style:dashed}
+.addtag:hover{color:var(--ink)}
+.date{margin-left:auto;font-size:12px;color:var(--muted)}
+
+.block{position:relative;border-radius:10px;margin:2px 0}
+.thead{display:flex;align-items:center;gap:2px;padding:2px 4px 2px 0;border-radius:10px}
+.thead:hover,.block.text:hover{background:var(--hover)}
+.chev{width:32px;height:36px;display:grid;place-items:center;color:var(--muted);flex:none}
+.chev svg{transition:transform .15s}
+.open>.thead .chev svg{transform:rotate(90deg)}
+.ttitle{flex:1;font-weight:700;font-size:16px;padding:6px 4px;height:36px}
+.bactions{display:flex;opacity:0;transition:opacity .1s}
+.block:hover .bactions,.block:focus-within .bactions{opacity:1}
+.bactions .ib{width:30px;height:30px}
+.tcontent{display:none;padding:0 8px 10px 36px}
+.open>.tcontent{display:block}
+.tcontent textarea{border-left:2px solid var(--line);padding:4px 0 4px 14px}
+.tcontent textarea:focus{border-left-color:var(--accent)}
+textarea{display:block;width:100%;resize:none;overflow:hidden;line-height:1.75;font-size:15px;min-height:32px}
+.block.text{display:flex;align-items:flex-start;padding:4px 4px 4px 36px}
+.block.text textarea{flex:1;padding:4px 0}
+.block.hit>.thead{box-shadow:inset 3px 0 0 var(--accent);background:color-mix(in srgb,var(--mark) 45%,transparent)}
+.adds{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;padding-left:4px}
+.adds button{display:flex;align-items:center;gap:6px;padding:7px 12px;border:1px dashed var(--line);color:var(--muted);font-size:13.5px}
+.adds button:hover{color:var(--ink);border-color:var(--muted);background:var(--hover)}
+.hint{margin-top:28px;font-size:12.5px;color:var(--muted)}
+
+.welcome{max-width:520px;margin:12vh auto 0;padding:0 24px;text-align:center}
+.welcome h1{font-size:30px;line-height:1.2;margin:0 0 10px;text-wrap:balance}
+.welcome p{color:var(--muted);margin:0 0 24px}
+
+@media(max-width:760px){
+  .editor{padding:4px 16px 120px}
+  .bactions{opacity:1}
+  .tcontent{padding-left:28px}
+  .block.text{padding-left:28px}
+}
+@media(prefers-reduced-motion:reduce){.chev svg{transition:none}}
